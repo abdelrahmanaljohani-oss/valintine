@@ -48,17 +48,32 @@
 </head>
 <body>
 
-  <div class="card">
-    <h1>Will you be my Valentine? 💖</h1>
+  <div class="card" id="card">
+    <h1 id="question">Will you be my Valentine? 💖</h1>
     <button id="yes" onclick="yesClicked()">Yes</button>
     <button id="no">No</button>
   </div>
 
   <script>
     const noButton = document.getElementById("no");
+    const question = document.getElementById("question");
+
+    const noTexts = [
+      "Are you sure? 😏",
+      "Are you really sure? 🤨",
+      "Are you positive? 😳",
+      "Last chance! 😭",
+      "No way back now 😈"
+    ];
+
+    let noCount = 0;
 
     noButton.addEventListener("mouseover", moveButton);
-    noButton.addEventListener("click", moveButton);
+    noButton.addEventListener("click", () => {
+      question.innerText = noTexts[noCount % noTexts.length];
+      noCount++;
+      moveButton();
+    });
 
     function moveButton() {
       const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
@@ -70,9 +85,14 @@
 
     function yesClicked() {
       document.body.innerHTML = `
-        <h1 style="color:white; font-size:40px;">
-          Yay!! 💘🥰<br>You just made my day ❤️
-        </h1>
+        <div style="text-align:center;">
+          <h1 style="color:white; font-size:40px;">
+            YAAAY 💘🥰
+          </h1>
+          <img src="cat.jpg" 
+               style="max-width:300px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+          <p style="color:white; font-size:22px;">Happy Valentine ❤️</p>
+        </div>
       `;
     }
   </script>
